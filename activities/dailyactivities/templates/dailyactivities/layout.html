@@ -1,0 +1,134 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	{% block heading%}
+	{% endblock heading%}
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'dailyactivities/main.css' %}">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+	}
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Thought Organizer</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if user.is_authenticated%}
+            <a class="nav-item nav-link" href="{% url 'post-create'%}">New Thought</a>  
+            <a class="nav-item nav-link" href="{% url 'profile'%}">Profile</a>          
+            <a class="nav-item nav-link" href="{% url 'logout'%}">Logout</a>
+          {% else%}
+            <a class="nav-item nav-link" href="{% url 'login'%}">Login</a>
+            <!--<a class="nav-item nav-link" href="{% url 'register'%}">Register</a>-->
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+	
+<div class="sidenav">
+  <a href="{% url 'dailyactivities-home'%}">Home</a>
+  <a href="{% url 'dailyactivities-journey' %}">Journey</a>
+  <a href="{% url 'dailyactivities-interviewquestions' %}">Interview Ques</a>
+  <a href="{% url 'dailyactivities-notes' %}">Notes</a>
+  <a href="{% url 'dailyactivities-requirementunderstanding' %}">Req-Understand</a>
+    <a href="{% url 'dailyactivities-fitness' %}">Fitness</a>
+  <a href="{% url 'dailyactivities-thoughts' %}">Thoughts</a>
+  <a href="{% url 'dailyactivities-dailyevents' %}">Dailyevents</a>
+</div>
+
+
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}"></div>
+      {{message}}
+    {% endfor %}
+  {% endif%}
+	{% block content%}
+	{% endblock content%}
+</div>
+
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% block blog %}{% endblock blog%}
+    </div>
+    <!--<div class="col-md-4">
+      <div class="content-section">
+        <h3>Our Sidebar</h3>
+        <p class='text-muted'>You can put any information here you'd like.
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">Latest Posts</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+            <li class="list-group-item list-group-item-light">Calendars</li>
+            <li class="list-group-item list-group-item-light">etc</li>
+          </ul>
+        </p>
+      </div>
+    </div>-->
+  </div>
+</main>
+</body>
+</html>
