@@ -123,7 +123,8 @@ class fitness(LoginRequiredMixin, UserPassesTestMixin,ListView):
 		#user = get_object_or_404(User,username=self.kwargs.get('username'))
 		#return Post.objects.filter(author=user).order_by('-date_posted')
 
-
+def RNN(request):
+	return render(request,'dailyactivities/RNN.html')	
 
 #def thoughts(request):
 #	context = {
